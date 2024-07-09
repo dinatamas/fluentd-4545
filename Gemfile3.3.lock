@@ -1,0 +1,104 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aws-eventstream (1.3.0)
+    aws-partitions (1.933.0)
+    aws-sdk-core (3.196.1)
+      aws-eventstream (~> 1, >= 1.3.0)
+      aws-partitions (~> 1, >= 1.651.0)
+      aws-sigv4 (~> 1.8)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sigv4 (1.8.0)
+      aws-eventstream (~> 1, >= 1.0.2)
+    concurrent-ruby (1.2.3)
+    cool.io (1.8.1)
+    digest-crc (0.6.5)
+      rake (>= 12.0.0, < 14.0.0)
+    excon (0.110.0)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-net_http (3.1.0)
+      net-http
+    faraday_middleware-aws-sigv4 (1.0.1)
+      aws-sigv4 (~> 1.0)
+      faraday (>= 2.0, < 3)
+    fluent-config-regexp-type (1.0.0)
+      fluentd (> 1.0.0, < 2)
+    fluent-plugin-flatten-hash (0.5.1)
+      fluentd (>= 0.14.12, < 2)
+    fluent-plugin-grok-parser (2.6.2)
+      fluentd (>= 0.14.6, < 2)
+    fluent-plugin-kafka (0.15.3)
+      fluentd (>= 0.10.58, < 2)
+      ltsv
+      ruby-kafka (>= 1.2.0, < 2)
+    fluent-plugin-opensearch (1.0.4)
+      aws-sdk-core (~> 3)
+      excon
+      faraday_middleware-aws-sigv4
+      fluentd (>= 0.14.22)
+      opensearch-ruby
+    fluent-plugin-prometheus (2.0.2)
+      fluentd (>= 1.9.1, < 2)
+      prometheus-client (>= 2.1.0)
+    fluent-plugin-record-modifier (2.1.0)
+      fluentd (>= 1.0, < 2)
+    fluent-plugin-rewrite-tag-filter (2.4.0)
+      fluent-config-regexp-type
+      fluentd (>= 0.14.2, < 2)
+    fluentd (1.15.3)
+      bundler
+      cool.io (>= 1.4.5, < 2.0.0)
+      http_parser.rb (>= 0.5.1, < 0.9.0)
+      msgpack (>= 1.3.1, < 2.0.0)
+      serverengine (>= 2.3.0, < 3.0.0)
+      sigdump (~> 0.2.2)
+      strptime (>= 0.2.4, < 1.0.0)
+      tzinfo (>= 1.0, < 3.0)
+      tzinfo-data (~> 1.0)
+      webrick (>= 1.4.2, < 1.8.0)
+      yajl-ruby (~> 1.0)
+    http_parser.rb (0.8.0)
+    jmespath (1.6.2)
+    ltsv (0.1.2)
+    msgpack (1.7.2)
+    multi_json (1.15.0)
+    net-http (0.4.1)
+      uri
+    oj (3.12.2)
+    opensearch-ruby (3.3.0)
+      faraday (>= 1.0, < 3)
+      multi_json (>= 1.0)
+    prometheus-client (4.2.2)
+    rake (13.2.1)
+    ruby-kafka (1.5.0)
+      digest-crc
+    serverengine (2.3.2)
+      sigdump (~> 0.2.2)
+    sigdump (0.2.5)
+    strptime (0.2.5)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2024.1)
+      tzinfo (>= 1.0.0)
+    uri (0.13.0)
+    webrick (1.7.0)
+    yajl-ruby (1.4.3)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  fluent-plugin-flatten-hash (= 0.5.1)
+  fluent-plugin-grok-parser (= 2.6.2)
+  fluent-plugin-kafka (= 0.15.3)
+  fluent-plugin-opensearch (= 1.0.4)
+  fluent-plugin-prometheus (= 2.0.2)
+  fluent-plugin-record-modifier (= 2.1.0)
+  fluent-plugin-rewrite-tag-filter (= 2.4.0)
+  fluentd (= 1.15.3)
+  oj (= 3.12.2)
+
+BUNDLED WITH
+   2.5.9

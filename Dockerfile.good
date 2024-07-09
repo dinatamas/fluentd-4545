@@ -1,0 +1,43 @@
+FROM registry.suse.com/suse/sle15:15.6 AS ruby-binaries
+
+RUN zypper -n install -y awk make gcc
+RUN zypper -n install -y zlib zlib-devel
+RUN zypper -n install -y libopenssl-1_1-devel libyaml-devel libffi-devel strace
+
+RUN mkdir /usr/local/bundle
+ENV GEM_HOME=/usr/local/bundle
+ENV BUNDLE_PATH=$GEM_HOME
+ENV BUNDLE_APP_CONFIG=$BUNDLE_PATH
+
+ADD https://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.9.tar.gz /usr/src/packages/SOURCES/
+
+WORKDIR /usr/src/packages/BUILD
+RUN tar -xf /usr/src/packages/SOURCES/ruby-2.5.9.tar.gz
+WORKDIR /usr/src/packages/BUILD/ruby-2.5.9
+RUN ./configure --disable-install-doc --disable-install-rdoc --disable-install-capi
+RUN make -j32
+RUN make -j32 install
+
+WORKDIR /
+COPY .gemrc /
+COPY Gemfile /
+COPY Gemfile2.5.lock /Gemfile.lock
+
+RUN gem install bundler --version 1.16.1
+RUN cp /usr/local/bundle/bin/bundle /usr/local/bin/
+RUN bundle config set --global frozen true
+RUN bundle config set deployment true
+RUN bundle config jobs 16
+RUN bundle install --verbose --gemfile Gemfile --standalone --binstubs=/usr/local/bin
+RUN rm -rf /usr/local/bundle/cache/*.gem
+RUN rm -rf /usr/local/bundle/ruby/*/cache
+RUN find /usr/local/bundle -name "*.c" -delete
+RUN find /usr/local/bundle -name "*.o" -delete
+
+ENV RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=0.9
+
+COPY fluent.conf /fluentd/
+
+RUN fluentd --setup /fluentd
+
+CMD ["bash", "-c", "echo something && fluentd -vv -c /fluentd/fluent.conf"]

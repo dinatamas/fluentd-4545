@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'fluentd', '1.15.3'
+gem 'fluent-plugin-rewrite-tag-filter', '2.4.0'
+gem 'fluent-plugin-grok-parser', '2.6.2'
+gem 'fluent-plugin-kafka', '0.15.3'
+gem 'fluent-plugin-record-modifier', '2.1.0'
+gem 'fluent-plugin-prometheus', '2.0.2'
+gem 'fluent-plugin-opensearch', '1.0.4'
+gem 'fluent-plugin-flatten-hash', '0.5.1'
+gem 'oj', '3.12.2'
